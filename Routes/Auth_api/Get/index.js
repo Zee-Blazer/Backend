@@ -22,8 +22,8 @@ router.get('/users', (req, res) => {
     } )
 } )
 
-router.get('/specific/user', (req, res) => {
-    User.findOne({_id: req.body.id}, (err, doc) => {
+router.get('/specific/user/:user_id', (req, res) => {
+    User.findOne({_id: req.params.user_id}, (err, doc) => {
         if(err) return res.status(500).send(err);
         res.status(200).send(doc);
     })

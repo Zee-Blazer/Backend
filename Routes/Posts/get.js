@@ -15,4 +15,11 @@ router.get('/image/:name', (req, res) => {
     res.sendFile(__dirname + `/Posts/${req.params.name}`);
 })
 
+router.get("/specific/user/:user_id", (req, res) => {
+    Post.find( {user_id: req.params.user_id}, (err, doc) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).send(doc);
+    } )
+})
+
 module.exports = router;
