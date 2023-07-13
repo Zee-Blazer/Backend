@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken');
 
 const config = require("../Config/config").get(process.env.NODE_ENV);
 
+//DOTENV CONFIGURATION
+require('dotenv').config();
+
 const SALT_I = 10;
 
 
@@ -66,9 +69,19 @@ userSchema.methods.comparePassword = function(cPassword, cb) {
     })
 }
 
+userSchema.methods.changePwd = function(newPwd, cb) {
+    var user = this;
+
+    user.password = newPwd;
+    user.save( function(err, user) {
+        if(err) return cb(err);
+        cb(null, user);
+    } )
+}
+
 userSchema.methods.generateToken = function(cb) {
     var user = this;
-    var token = jwt.sign(user._id.toHexString(), config.SECRET); // '18000s'
+    var token = jwt.sign(user._id.toHexString(), process.env.SECRET); // '18000s'
 
     user.token = token;
     user.save(function(err, user){
@@ -80,7 +93,7 @@ userSchema.methods.generateToken = function(cb) {
 userSchema.statics.findByToken = function(token, cb) {
     var user = this;
 
-    jwt.verify(token, config.SECRET, function(err, decode) {
+    jwt.verify(token, process.env.SECRET, function(err, decode) {
         if(err) return cb(err);
 
         user.findOne({"_id": decode, "token": token}, function(err, user) {

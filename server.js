@@ -5,6 +5,9 @@ const config = require('./Config/config').get(process.env.NODE_ENV);
 
 const cors = require('cors');
 
+// Dotenv configuration
+require('dotenv').config();
+
 const app = express();
 
 // Cors Middleware
@@ -94,7 +97,7 @@ app.use('/status', require('./Routes/Status/get'));
 /// ======================== End of Users Status Routes =========================== ///
 
 
-mongoose.connect(config.DATABASE, {
+mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -115,4 +118,4 @@ app.post('/app', (req, res) => {
 
 const port = process.env.PORT || 3004;
 
-app.listen(port, () => console.log("Server running"))
+app.listen(port, () => console.log(`Server running ${port}`))

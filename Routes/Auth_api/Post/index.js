@@ -44,6 +44,29 @@ router.post('/login', (req, res) => {
 
 })
 
+router.post('/change-pwd', (req, res) => {
+    
+    User.findOne( { email: req.body.email }, (err, user) => {
+        if(!user) return res.json({ 
+            isAuth: false, 
+            msg: "User not found, Check email" 
+        });
+
+        user.comparePassword(req.body.password, (err, isMatch) => {
+            if(!isMatch) return res.json({ 
+                isAuth: false, 
+                msg: "Incorrect Password" 
+            })
+
+            user.changePwd(req.body.newPwd, (err, user) => {
+                if(err) return res.status(400).send(err);
+                res.status(200).json({ isAuth: true, user })
+            } )
+        })
+    } )
+
+})
+
 router.post('/logout', auth, (req, res) => {
     req.user.deleteToken(req.token, (err, user) => {
         if(err) return res.status(400).send(err);

@@ -22,4 +22,11 @@ router.get("/specific/user/:user_id", (req, res) => {
     } )
 })
 
+router.get("/specific/comment/:user_id", (req, res) => {
+    Post.find( { _id: req.params.user_id }, (err, doc) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).send(doc[0].comments)
+    } )
+})
+
 module.exports = router;
