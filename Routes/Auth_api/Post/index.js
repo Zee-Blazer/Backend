@@ -8,7 +8,8 @@ const { User } = require('../../../Models/user');
 const { auth } = require('../../../Middlewares/auth');
 
 router.post('/signup', (req, res) => {
-    const user = new User(req.body);
+    const { username, email, password } = req.body
+    const user = new User({ username: username.toLowerCase(), email, password });
 
     user.save( (err, doc) => {
         if(err) return res.status(400).send(err);

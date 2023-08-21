@@ -11,7 +11,7 @@ const multer = require('multer');
 const moment = require('moment');
 
 const storage = multer.diskStorage({
-    destination: "./Backend/Routes/Status/Statuses",
+    destination: "./Routes/Status/Statuses",
     filename: function (req, file, cb) {
         const urlName = `${Date.now()}-${file.originalname}`;
         req.body.urlLink = urlName;

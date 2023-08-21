@@ -11,7 +11,7 @@ const moment = require('moment');
 const { Post } = require('../../Models/posts');
 
 const storage = multer.diskStorage({
-    destination: "./Backend/Routes/Posts/Posts",
+    destination: "./Routes/Posts/Posts",
     filename: function (req, file, cb) {
         const urlName = `${Date.now()}-${file.originalname}`;
         req.body.urlLink = urlName;

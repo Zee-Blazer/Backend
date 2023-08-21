@@ -7,7 +7,7 @@ const multer = require('multer');
 const { User } = require('../../Models/user');
 
 const storage = multer.diskStorage({
-    destination: "./Backend/Routes/Profile/ProfilePic",
+    destination: "./Routes/Profile/ProfilePic",
     filename: function (req, file, cb) {
         const urlName = `${Date.now()}-${file.originalname}`;
         req.body.urlLink = urlName;
