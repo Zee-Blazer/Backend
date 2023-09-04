@@ -23,6 +23,13 @@ const userSchema = mongoose.Schema({
         trim: true,
         unique: 1
     },
+    bio: String,
+    followers: [
+        { username: String, user_id: String }
+    ],
+    following: [
+        { username: String, user_id: String }
+    ],
     password: {
         type: String,
         required: true,
@@ -114,7 +121,7 @@ userSchema.methods.deleteToken = function(token, cb) {
 }
 
 const User = mongoose.model("User", userSchema);
+const DeleteUser = mongoose.model("DeleteUser", userSchema);
 
-
-module.exports = { User };
+module.exports = { User, DeleteUser };
 

@@ -33,7 +33,7 @@ router.post('/new', (req, res) => {
                 user_id, 
                 msg, 
                 likes: 0, 
-                date: `${moment().format('l')}, ${moment(moment()).format("hh:mm A")}`, 
+                date: `${moment().format('MMMM Do YYYY, h:mm a')}`, 
                 fileUrl: req.file.filename 
             });
 
@@ -44,6 +44,26 @@ router.post('/new', (req, res) => {
         }
 
     })
+})
+
+// Main post without an image
+router.post('/new-msg', (req, res) => {
+    const post = new Post({
+        user_id: req.body.user_id,
+        msg: req.body.msg,
+        date: `${moment().format('MM/DD/YYYY, h:mm a')}`, 
+        likes: 0
+    });
+    post.save( (err, doc) => {
+        if(err) res.status(400).send(err);
+        res.status(200).send(doc)
+    } )
+})
+
+// Trting to get current time from now
+router.get('/test', (req, res) => {
+    console.log(moment("09/04/2023, 05:54 PM", "MM/DD/YYYY, hh:mm A").fromNow())
+    res.send(moment("09/04/2023, 05:54 PM", "MM/DD/YYYY, hh:mm A").fromNow());
 })
 
 // Like Post

@@ -31,6 +31,9 @@ app.use('/auth/read', require('./Routes/Auth_api/Get/index'));
 // Add/Post info to server
 app.use('/auth/edit', require('./Routes/Auth_api/Post/index'));
 
+// Delete User Info
+app.use('/auth', require('./Routes/Auth_api/Delete/index'));
+
 //// ================ End Of Authentication Route ================ ////
 
 
@@ -78,6 +81,9 @@ app.use('/post', require('./Routes/Posts/post'));
 // Get Methods for the Users Posts
 app.use('/post', require('./Routes/Posts/get'));
 
+// Delete Methods for the Users Posts
+app.use('/post', require('./Routes/Posts/delete'));
+
 /// ===================== End of User Posts, posting Routes ======================== ///
 
 
@@ -93,6 +99,9 @@ app.use('/status', require('./Routes/Status/post'));
 
 // Get Methods for the Status posts
 app.use('/status', require('./Routes/Status/get'));
+
+// Delete Methods for the Status posts
+app.use('/status', require('./Routes/Status/delete'));
 
 /// ======================== End of Users Status Routes =========================== ///
 

@@ -11,9 +11,10 @@ const statusSchema = mongoose.Schema({
         type: String
     },
     time: important,
-    fileUrl: important
+    fileUrl: important,
 });
 
 const Status = mongoose.model("Status", statusSchema);
+const DeletedStatus = mongoose.model("DeletedStatus", statusSchema);
 
-module.exports = { Status };
+module.exports = { Status, DeletedStatus };

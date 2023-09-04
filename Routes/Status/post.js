@@ -30,7 +30,7 @@ router.post("/new", (req, res) => {
             const status = new Status({ 
                 user_id,
                 msg,
-                time: `${moment().format('l')}, ${moment(moment()).format("hh:mm A")}`,
+                time: `${moment().format('MM/DD/YYYY, h:mm a')}`,
                 fileUrl: req.file.filename
             })
 

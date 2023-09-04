@@ -6,6 +6,9 @@ const multer = require('multer');
 // Models
 const { User } = require('../../Models/user');
 
+// Auth
+const { auth } = require('../../Middlewares/auth');
+
 const storage = multer.diskStorage({
     destination: "./Routes/Profile/ProfilePic",
     filename: function (req, file, cb) {
@@ -31,6 +34,17 @@ router.post('/file', (req, res) => {
             );
         }
     })
+})
+
+// Update About Info
+router.post('/update-about', auth, (req, res) => {
+    User.findByIdAndUpdate(
+        req.body.id, 
+        { username: req.body.username, email: req.body.email, bio: req.body.bio }, 
+        (err, doc) => {
+            if(err) res.status(400).send(err);
+            res.status(200).send(doc);
+    } )
 })
 
 

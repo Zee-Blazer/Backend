@@ -17,10 +17,11 @@ const postSchema = mongoose.Schema({
         { username: String, user_id: String, msg: String }
     ],
     peopleLike: [ String ],
-    fileUrl: important,
+    fileUrl: String,
     date: important
 });
 
 const Post = mongoose.model("Posts", postSchema);
+const DeletePost = mongoose.model("DeletedPosts", postSchema);
 
-module.exports = { Post };
+module.exports = { Post, DeletePost };
