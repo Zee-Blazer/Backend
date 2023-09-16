@@ -36,8 +36,24 @@ router.post('/file', (req, res) => {
     })
 })
 
+router.post('/file-cover', (req, res) => {
+    upload(req, res, (err) => {
+        if(err) res.status(400).send(err);
+        if(req.file){
+            User.findByIdAndUpdate( 
+                req.body.user_id, 
+                { coverprofile: req.file.filename }, 
+                (err, doc) => {
+                    if(err) res.status(404).send(err);
+                    res.status(200).send(doc);
+                }
+            );
+        }
+    })
+})
+
 // Update About Info
-router.post('/update-about', auth, (req, res) => {
+router.post('/update-about', (req, res) => {
     User.findByIdAndUpdate(
         req.body.id, 
         { username: req.body.username, email: req.body.email, bio: req.body.bio }, 

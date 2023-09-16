@@ -103,10 +103,21 @@ app.use('/status', require('./Routes/Status/get'));
 // Delete Methods for the Status posts
 app.use('/status', require('./Routes/Status/delete'));
 
-/// ======================== End of Users Status Routes =========================== ///
+
+/// ======================== End of Users Followers and following Routes =========================== ///
+
+/// ========================== Users Followers and Following Routes ============================= ///
+
+// Post Methods for the Status posts
+app.use('/follow', require('./Routes/Follow/post'));
+
+// Get Methods for the Status posts
+app.use('/follow', require('./Routes/Follow/get'));
+
+/// ======================== End of Users Followers and Following Routes =========================== ///
 
 
-mongoose.connect(process.env.DATABASE_URL, {
+mongoose.connect(process.env.ONLINE_DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

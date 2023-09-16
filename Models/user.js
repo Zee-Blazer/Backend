@@ -42,6 +42,9 @@ const userSchema = mongoose.Schema({
     profile: {
         type: String,
     },
+    coverprofile: {
+        type: String,
+    },
     token: {
         type: String
     }

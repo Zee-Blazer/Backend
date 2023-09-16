@@ -9,7 +9,7 @@ const { auth } = require('../../../Middlewares/auth');
 
 router.post('/signup', (req, res) => {
     const { username, email, password } = req.body
-    const user = new User({ username: username.toLowerCase(), email, password });
+    const user = new User({ username: username, email: email.toLowerCase(), password });
 
     user.save( (err, doc) => {
         if(err) return res.status(400).send(err);
