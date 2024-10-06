@@ -117,7 +117,7 @@ app.use('/follow', require('./Routes/Follow/get'));
 /// ======================== End of Users Followers and Following Routes =========================== ///
 
 
-mongoose.connect(process.env.ONLINE_DB, {
+mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
